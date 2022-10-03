@@ -19,9 +19,13 @@ Repository: https://github.com/TrafeX/docker-php-nginx
 ![php 8.1](https://img.shields.io/badge/php-8.1-brightgreen.svg)
 ![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)
 
-## [![Trafex Consultancy](https://timdepater.com/logo/mini-logo.png)](https://timdepater.com?mtm_campaign=github)
-I can help you with [Containerization, Kubernetes, Monitoring, Infrastructure as Code and other DevOps challenges](https://timdepater.com/?mtm_campaign=github).
+## Cusomized docker-php-nginx
+This repo maintains a few changes for a local server with SSL.
+## Usage
 
+1. update the `.env` file and the `nginx.conf` in the config folder.
+2. docker compose build
+3. docker compose up -d
 
 ## Goal of this project
 The goal of this container image is to provide an example for running Nginx and PHP-FPM in a container which follows
