@@ -1,7 +1,8 @@
 ARG ALPINE_VERSION=3.16
+ARG SERVER_NAME
 FROM alpine:${ALPINE_VERSION}
-LABEL Maintainer="Tim de Pater <code@trafex.nl>"
-LABEL Description="Lightweight container with Nginx 1.22 & PHP 8.1 based on Alpine Linux."
+# LABEL Maintainer="Tim de Pater <code@trafex.nl>"
+# LABEL Description="Lightweight container with Nginx 1.22 & PHP 8.1 based on Alpine Linux."
 # Setup document root
 WORKDIR /var/www/html
 
@@ -18,6 +19,7 @@ RUN apk add --no-cache \
   php81-intl \
   php81-mbstring \
   php81-mysqli \
+  php81-pgsql \
   php81-opcache \
   php81-openssl \
   php81-phar \
@@ -30,7 +32,11 @@ RUN apk add --no-cache \
 RUN ln -s /usr/bin/php81 /usr/bin/php
 
 # Configure nginx
-COPY config/nginx.conf /etc/nginx/nginx.conf
+ENV NGINX_DIR=/etc/nginx
+ENV NGINX_SERVER_NAME=${SERVER_NAME} 
+COPY config/nginx.conf ${NGINX_DIR}/nginx.conf
+RUN mkdir -p ${NGINX_DIR}/certs
+COPY config/${NGINX_SERVER_NAME}.* ${NGINX_DIR}/certs/
 
 # Configure PHP-FPM
 COPY config/fpm-pool.conf /etc/php81/php-fpm.d/www.conf
@@ -49,7 +55,7 @@ USER nobody
 COPY --chown=nobody src/ /var/www/html/
 
 # Expose the port nginx is reachable on
-EXPOSE 8080
+EXPOSE 8080 8443
 
 # Let supervisord start nginx & php-fpm
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

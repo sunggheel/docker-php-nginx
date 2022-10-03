@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  app:
+    container_name: nginx_php
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        SERVER_NAME: ${YOUR_SERVER_DOMAIN}
+    ports:
+      - "0.0.0.0:80:8080"
+      - "0.0.0.0:443:8443"
+    volumes:
+      - "/var/www/html:/var/www/html"
+    restart: unless-stopped
