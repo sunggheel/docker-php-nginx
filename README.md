@@ -29,9 +29,9 @@ Update the `.env` file and the `nginx.conf` in the config folder and run dokcer 
     docker compose build
     docker compose up -d
 
-## To change the `nginx.conf` file
+## To change the `nginx.conf` file in the Container
 
-    docker exec -u 0 -ti nginx_php sh   #to run as root
+    docker exec -u 0 -ti {container_name} sh   #to run as root
     vi /etc/nginx/nginx.conf
 
 ## Goal of this project
