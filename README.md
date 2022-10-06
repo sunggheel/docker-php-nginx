@@ -21,12 +21,18 @@ Repository: https://github.com/TrafeX/docker-php-nginx
 
 ## Cusomized docker-php-nginx
 This repo maintains a few changes for a local server with SSL.
+
 ## Usage
 
 Update the `.env` file and the `nginx.conf` in the config folder and run dokcer compose.
     
     docker compose build
     docker compose up -d
+
+## To change the `nginx.conf` file
+
+    docker exec -u 0 -ti nginx_php sh   #to run as root
+    vi /etc/nginx/nginx.conf
 
 ## Goal of this project
 The goal of this container image is to provide an example for running Nginx and PHP-FPM in a container which follows
