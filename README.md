@@ -33,6 +33,8 @@ Update the `.env` file and the `nginx.conf` in the config folder and run dokcer 
 
     docker exec -u 0 -ti {container_name} sh   #to run as root
     vi /etc/nginx/nginx.conf
+    nginx -t # to test the configuration file
+    nginx -s reload # to reload Nginx
 
 ## Goal of this project
 The goal of this container image is to provide an example for running Nginx and PHP-FPM in a container which follows
